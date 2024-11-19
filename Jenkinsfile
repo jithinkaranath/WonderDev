@@ -1,11 +1,11 @@
 pipeline {
-    //agent any  // This runs the pipeline on any available agent
-agent {
-        docker {
-            image 'docker:latest'
-            args '--privileged'  // Required for Docker-in-Docker to function correctly
-        }
-    }
+    agent any  // This runs the pipeline on any available agent
+// agent {
+//         docker {
+//             image 'docker:latest'
+//             args '--privileged'  // Required for Docker-in-Docker to function correctly
+//         }
+//     }
     environment {
         DOCKER_IMAGE = "educomz"   // Name of the Docker image
         DOCKER_TAG = "latest"     // Tag for the Docker image (e.g., "latest" or commit hash)
