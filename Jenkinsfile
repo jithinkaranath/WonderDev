@@ -18,6 +18,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
+                    //Checking Docker Version
+                    sh 'docker --version'
                     // Build the Docker image using the Dockerfile in the repository
                     docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
                 }
