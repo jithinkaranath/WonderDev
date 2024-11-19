@@ -1,6 +1,11 @@
 pipeline {
-    agent any  // This runs the pipeline on any available agent
-
+    //agent any  // This runs the pipeline on any available agent
+agent {
+        docker {
+            image 'docker:latest'
+            args '--privileged'  // Required for Docker-in-Docker to function correctly
+        }
+    }
     environment {
         DOCKER_IMAGE = "educomz"   // Name of the Docker image
         DOCKER_TAG = "latest"     // Tag for the Docker image (e.g., "latest" or commit hash)
@@ -18,6 +23,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
+                    //Checking Docker Version
+                    sh 'docker --version'
                     // Build the Docker image using the Dockerfile in the repository
                     docker.build("${DOCKER_IMAGE}:${DOCKER_TAG}")
                 }
